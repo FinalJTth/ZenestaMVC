@@ -1,0 +1,63 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model PredictionForm
+
+@{
+    ViewData["Title"] = "ML";
+}
+
+<div class="container h-100">
+    <div class="border border-dark-subtle container d-flex flex-column bg-darkblue align-items-center shadow-lg p-3 mb-5" style="height:100%;width:700px;margin-block-start:20vh">
+        <form method="POST" enctype="multipart/form-data" class="dropzone dz-clickable form-horizontal form-bordered" id="dropzoneMLPredictionForm" asp-controller="ML" asp-action="Predict">
+            <div class="form-group form-actions">
+                <div class="form-group" style="margin-top:10px">
+                    <label asp-for="BatchName"></label>
+                    <input class="form-control" type="string" asp-for="BatchName">
+                    <span asp-validation-for="BatchName" class="text-danger"></span>
+                </div>
+                <div class="col-md-9 col-md-offset-4">
+                    <button type="submit" id="submit" class="btn btn-sm btn-primary"><i class="bi bi-floppy"></i> Upload</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <link rel="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"> </script>
+    <script>
+        function myParamName() {
+            return "Images";
+        }
+        Dropzone.options.dropzoneMLPredictionForm = {
+            url: "https://localhost:7000/ML/Predict",
+            acceptedFiles: "image/jpeg, image/png, image/jpg",
+            autoProcessQueue: false,
+            autoDiscover: true,
+            paramName: myParamName, // The name that will be used to transfer each file
+            uploadMultiple: true,
+            parallelUploads: 100,
+            init: function () {
+                var wrapperThis = this;
+
+                wrapperThis.on("success", function (file, response) {
+                    if (response.redirectUrl) {
+                        window.location.href = response.redirectUrl;
+                    }
+                });
+
+                $("#submit").click(function (e) {
+                    e.preventDefault();
+                    wrapperThis.processQueue();
+                });
+            },
+            accept: function (file, done) {
+                done();
+            }
+        };
+
+    </script>
+}

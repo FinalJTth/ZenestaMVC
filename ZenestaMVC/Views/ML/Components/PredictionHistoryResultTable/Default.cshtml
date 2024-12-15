@@ -1,0 +1,50 @@
+﻿
+<div class="card w-100">
+    @{
+        List<List<ZenestaMVC.Models.Entity.PredictionResult>> predictionResults = new()
+        {
+            new List<ZenestaMVC.Models.Entity.PredictionResult>
+            {
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 1, Object = "Cat", Confidence = 0.999156f, PredictionId = 1 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 2, Object = "Cat", Confidence = 0.999156f, PredictionId = 1 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 3, Object = "Cat", Confidence = 0.999156f, PredictionId = 1 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 4, Object = "Cat", Confidence = 0.999156f, PredictionId = 1 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 5, Object = "Cat", Confidence = 0.999156f, PredictionId = 1 }
+            },
+            new List<ZenestaMVC.Models.Entity.PredictionResult>
+            {
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 6, Object = "Dog", Confidence = 0.999156f, PredictionId = 2 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 7, Object = "Dog", Confidence = 0.999156f, PredictionId = 2 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 8, Object = "Dog", Confidence = 0.999156f, PredictionId = 2 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 9, Object = "Dog", Confidence = 0.999156f, PredictionId = 2 },
+                new ZenestaMVC.Models.Entity.PredictionResult { Id = 10, Object = "Dog", Confidence = 0.999156f, PredictionId = 1 }
+            },
+        };
+
+
+
+        List<ZenestaMVC.Models.Entity.PredictionImage> predictionImages = new()
+        {
+            new ZenestaMVC.Models.Entity.PredictionImage { Id = 1, Name = "test1.jpg", PredictionId = 1, Data = File.ReadAllBytes("./wwwroot/img/test/cat-pictures-zc3gu0636kmldm04.jpg") },
+            new ZenestaMVC.Models.Entity.PredictionImage { Id = 2, Name = "test2.png", PredictionId = 2, Data = File.ReadAllBytes("path/to/your/Odie.png") }
+        };
+
+        List<ZenestaMVC.Models.Entity.Prediction> predictions = new()
+        {
+            new ZenestaMVC.Models.Entity.Prediction { Id = 1, PredictionBatchId = 1, PredictionResults = predictionResults[0] },
+            new ZenestaMVC.Models.Entity.Prediction { Id = 2, PredictionBatchId = 1, PredictionResults = predictionResults[1] }
+        };
+    }
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="..." class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div>

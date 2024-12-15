@@ -1,0 +1,29 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model UserLoginForm;
+
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="container h-100">
+    <div class="border border-dark-subtle container d-flex flex-column bg-darkblue align-items-center shadow-lg p-3 mb-5 rounded-3" style="height:100%;width:350px;margin-block-start:20vh">
+        <h1 class="text fw-bold">Sign in</h1>
+        <form method="POST" style="margin-top:25px" asp-controller="User" asp-action="Login">
+            <div class="row justify-content-center p-4">
+                <div class="form-group">
+                    <label asp-for="UserId"></label>
+                    <input class="form-control" type="text" asp-for="UserId">
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                    <label asp-for="Password"></label>
+                    <input id="inputUserIdLogin" class="form-control" type="password" asp-for="Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary w-75 mt-lg-5 align-self-center">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

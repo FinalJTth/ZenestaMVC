@@ -1,0 +1,95 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@addTagHelper *, ZenestaMVC
+
+@model PredictionHistoryViewModel
+
+@{
+    ViewData["Title"] = "ML";
+}
+
+<div class="container h-100">
+    <div class="border-dark-subtle container-lg d-flex flex-row bg-transparent shadow-lg px-0 rounded-3" style="margin-block-start:20vh">
+        <div class="d-flex flex-column" style="min-width:550px; max-width:550px;">
+            <vc:prediction-history-batch-table page=@Model.Page chosen-batch-id=@Model.ChosenBatchId></vc:prediction-history-batch-table>
+            <nav class="mt-4 align-self-center" aria-label="Page navigation example">
+                <ul class="pagination">
+                    @{
+                        bool isPreviousDisabled = Model.Page == 1;
+                        bool isNextDisabled = Model.Page == Model.MaxPage;
+
+                        int pageNumber1 = Model.Page - 1;
+                        int pageNumber2 = Model.Page;
+                        int pageNumber3 = Model.Page + 1;
+                    }
+
+                    @* Previous button *@
+                    @if (!isPreviousDisabled)
+                    {
+                        <li class="page-item">
+                            <a class="page-link bg-darkblue" href="@Url.Action("PredictionHistory", "ML", new { page = Model.Page, chosenBatchId = Model.ChosenBatchId })">Previous</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">Previous</span>
+                        </li>
+                    }
+
+                    @* First page number button *@
+                    @if (pageNumber1 > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link bg-darkblue" href="@Url.Action("PredictionHistory", "ML", new { page = Model.Page, chosenBatchId = Model.ChosenBatchId })">@pageNumber1</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">&#8203;</span>
+                        </li>
+                    }
+
+                    @* Second page number button *@
+                    <li class="page-item">
+                        <a class="page-link bg-darkblue" href="@Url.Action("PredictionHistory", "ML", new { page = Model.Page, chosenBatchId = Model.ChosenBatchId })">@pageNumber2</a>
+                    </li>
+
+                    @* Third page number button *@
+                    @if (pageNumber3 < Model.MaxPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link bg-darkblue" href="@Url.Action("PredictionHistory", "ML", new { page = Model.Page, chosenBatchId = Model.ChosenBatchId })">@pageNumber3</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">&#8203;</span>
+                        </li>
+                    }
+
+                    @* Next button *@
+                    @if (!isNextDisabled)
+                    {
+                        <li class="page-item">
+                            <a class="page-link bg-darkblue" href="@Url.Action("PredictionHistory", "ML", new { page = Model.Page, chosenBatchId = Model.ChosenBatchId })">Next</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item disabled">
+                            <span class="page-link">Next</span>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+        <div style="width:10%"></div>
+        <div class="border bg-dark flex-grow-1">
+            <vc:prediction-history-result-table />
+        </div>
+    </div>
+</div>

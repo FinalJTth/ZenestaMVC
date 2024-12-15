@@ -1,0 +1,88 @@
+﻿@addTagHelper *, ZenestaMVC
+
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ZenestaMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ZenestaMVC.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm bg-darker box-shadow mb-3 py-0 fixed-top" style="height:50px;">
+            <div class="container-fluid" style="height:100%">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><div class="text fw-bolder">ZenestaDEV</div></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse h-100 d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 h-100">
+                        <li class="nav-item px-1 align-content-center">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
+                                <div class="text fw-bold">Home</div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-1 align-content-center">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                <div class="text fw-bold">Privacy</div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-1 align-content-center">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
+                                <div class="text fw-bold">Videos</div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-1 align-content-center">
+                            <a class="nav-link" asp-area="" asp-controller="ML" asp-action="Index">
+                                <div class="text fw-bold">ML</div>
+                            </a>
+                        </li>
+                        <li class="nav-item px-1 align-content-center">
+                            <a class="nav-link" asp-area="" asp-controller="ML" asp-action="PredictionHistory">
+                                <div class="text fw-bold">Prediction History</div>
+                            </a>
+                        </li>
+                    </ul>
+                    <spacing />
+                    <ul class="navbar-nav flex-grow-1">
+                        <vc:user-button-layout />
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="scroller">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js" integrity="sha256-sPB0F50YUDK0otDnsfNHawYmA5M0pjjUf4TvRJkGFrI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.js" integrity="sha256-XNNC8ESw29iopRLukVRazlP44TxnjGmEQanHJ5kHmtk=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
+    <script>
+        // Adjust jQuery validation settings to validate on blur instead of keyup
+        $.validator.setDefaults({
+            onkeyup: false, // Disable validation on keyup
+            onfocusout: function (element) {
+                // Enable validation on blur (focus out)
+                if (!$(element).is(':checkbox')) {
+                    $(element).valid();
+                }
+            }
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

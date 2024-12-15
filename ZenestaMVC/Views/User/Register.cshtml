@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model UserRegisterForm;
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container h-100">
+    <div class="border border-dark-subtle container d-flex flex-column bg-darkblue align-items-center shadow p-3 mb-5 rounded-3" style="height:100%;width:350px;margin-block-start:20vh">
+        <h1 class="text fw-bold">Register</h1>
+        <form id="formRegister" method="POST"asp-controller="User" asp-action="Register">
+            <div class="row justify-content-center p-4">
+                <div class="form-group">
+                    <label asp-for="Username"></label><span style="color:red"> *</span>
+                    <input class="form-control" type="text" asp-for="Username">
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                    <label asp-for="Password"></label><span style="color:red"> *</span>
+                    <div class="input-group">
+                        <input class="form-control" type="password" asp-for="Password">
+                        <span class="input-group-text"><i class="bi bi-eye-slash"></i></span>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                    <label asp-for="Email"></label><span style="color:red"> *</span>
+                    <input class="form-control" type="email" asp-for="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="d-flex col" style="margin-top:10px">
+                    <div class="form-group w-75">
+                        <label asp-for="DateOfBirth"></label><span style="color:red"> *</span>
+                        <input id="inputDateOfBirthRegister" class="form-control" type="date" asp-for="DateOfBirth">
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+                    <div class="form-group w-auto">
+                        <label asp-for="Age"></label><span style="color:red"> *</span>
+                        <input id="inputAgeRegister" class="form-control" type="number" asp-for="Age" style="border-left:0px" readonly>
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-75 mt-lg-5 align-self-center">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('#inputDateOfBirthRegister').change(function () {
+            var inputDate = new Date($('#inputDateOfBirthRegister').val());
+            var currentDate = new Date();
+            $('#inputAgeRegister').val(milisecToYear(currentDate - inputDate));
+        });
+
+        function milisecToYear(mSeconds) {
+            var year = Math.floor(mSeconds / 31536000000);
+            return year;
+        }
+    </script>
+}

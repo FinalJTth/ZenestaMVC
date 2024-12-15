@@ -1,0 +1,17 @@
+﻿@model UserButtonLayoutViewComponentModel
+
+@if (Model.Username.Length != 0)
+{
+    <li class="nav-item">
+        <a class="nav-link"><div class="text fw-bold">@Model.Username</div></a>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="User" asp-action="Login"><div class="text fw-bold">Login</div></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="User" asp-action="Register"><div class="text fw-bold">Register</div></a>
+    </li>
+}

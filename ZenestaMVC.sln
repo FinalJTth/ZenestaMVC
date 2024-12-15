@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZenestaMVC", "ZenestaMVC\ZenestaMVC.csproj", "{AE44E1C3-B906-49F8-B51E-4DE10FA95911}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE44E1C3-B906-49F8-B51E-4DE10FA95911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE44E1C3-B906-49F8-B51E-4DE10FA95911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE44E1C3-B906-49F8-B51E-4DE10FA95911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE44E1C3-B906-49F8-B51E-4DE10FA95911}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEC41C5B-F65F-42E4-9B92-37B1919413BC}
+	EndGlobalSection
+EndGlobal

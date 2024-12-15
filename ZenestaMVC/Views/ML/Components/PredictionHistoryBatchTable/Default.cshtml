@@ -1,0 +1,28 @@
+﻿@model PredictionHistoryBatchTableViewModel
+
+<div class="container border bg-darkblue w-100 rounded-3">
+    <center class="row">
+        <div class="text-center col-7 px-3 py-2 border-end"><b>Prediction Batch Name</b></div>
+        <div class="text-center col px-3 py-2"><b>Published Date</b></div>
+    </center>
+    @foreach (ZenestaMVC.Models.Entity.PredictionBatch batch in Model.PredictionBatches)
+    {
+        <center class="row border-top">
+            <div class="clickable-batch-row col-7 px-4 py-2 border-end">
+                <a class="row clickable text-decoration-none" href="@Url.Action("PredictionHistory", "ML", new { page = Model.Page, chosenBatchId = batch.Id })">
+                    @batch.Name
+                </a>
+            </div>
+            <div class="clickable-batch-row col px-3 py-2">@batch.DatePublished.ToUniversalTime()</div>
+        </center>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $("#batch-table").on('click-row.bs.table', function (e, row, $element) {
+            alert("test");
+            window.location = $element.data('href');
+        });
+    </script>
+}
