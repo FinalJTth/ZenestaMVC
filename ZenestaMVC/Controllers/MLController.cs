@@ -16,7 +16,7 @@ namespace ZenestaMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return UserId == null ? RedirectToAction("Login", "User") : View();
         }
 
         public IActionResult PredictionHistory(int? page, int? chosenBatchId)
@@ -35,42 +35,6 @@ namespace ZenestaMVC.Controllers
             // If page is null (not supplied) then just use page 1
             page ??= 1;
 
-            // When page "and" chosenBatchId are null or non position
-            /*
-            if (chosenBatchId is null && page is null)
-            {
-                page = 1;
-                chosenBatchId = _dbContext.PredictionBatches
-                    .OrderByDescending(batch => batch.DatePublished)
-                    .Select(batch => batch.Id)
-                    .FirstOrDefault();
-            // When only chosenBatchId is null or non position
-            if ((chosenBatchId is null or < 1) && (page is not null and not < 1))
-            {
-                chosenBatchId = _dbContext.PredictionBatches
-                    .OrderByDescending(batch => batch.DatePublished)
-                    .Select(batch => batch.Id)
-                    .Skip(((int) page) * 10)
-                    .FirstOrDefault();
-            }
-
-            // After assigning id, if the prediction batch is still null then return not found.
-            if (chosenBatchId is null or < 1)
-            {
-                return NotFound();
-            }
-
-            // When only page is null or non position
-            if ((chosenBatchId is not null and not < 1) && (page is null or < 1))
-            {
-                int index = _dbContext.PredictionBatches
-                    .Where(batch => batch.DatePublished > _dbContext.PredictionBatches.Single(batch => batch.Id == chosenBatchId).DatePublished)
-                    .Count();
-
-                page = 1 + (index / 10);
-            }
-            */
-
             int entryNumber = _dbContext.PredictionBatches.Where(batch => batch.UserId == UserId).Count();
 
             return View(new PredictionHistoryViewModel((int) page, chosenBatchId, 1 + (entryNumber / 10)));
@@ -78,6 +42,7 @@ namespace ZenestaMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(1000_000_000)]
         public async Task<IActionResult> Predict(PredictionForm predictionForm)
         {
             if (UserId == null)

@@ -8,16 +8,36 @@
 }
 
 <div class="container h-100">
-    <div class="border border-dark-subtle container d-flex flex-column bg-darkblue align-items-center shadow-lg p-3 mb-5" style="height:100%;width:700px;margin-block-start:20vh">
-        <form method="POST" enctype="multipart/form-data" class="dropzone dz-clickable form-horizontal form-bordered" id="dropzoneMLPredictionForm" asp-controller="ML" asp-action="Predict">
-            <div class="form-group form-actions">
-                <div class="form-group" style="margin-top:10px">
+    <div class="container d-flex flex-column align-items-center p-0 mb-5" style="height:100%;width:900px;margin-block-start:10vh">
+        <div class="container">
+            <h1>Machine Learning</h1>
+            <h5 style="font-weight:normal">
+                Machine Learning is a field of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed.
+                It involves algorithms that can analyze data, identify patterns, and make decisions with minimal human intervention.
+            </h5>
+            <h2 class="mt-3">Deep Learning</h2>
+            <span style="font-weight:normal">
+                Deep Learning is a subset of machine learning focused on algorithms inspired by the structure and function of the brain, called artificial neural networks.
+                It often has a multiple layers. allowing them to learn hierarchical representations of data.
+            </span>
+            <h2 class="mt-5">What can you do here ?</h2>
+            <span style="font-weight:normal">
+                Here lies the InceptionV3 model, a convolutional neural network architecture from the Inception family for image classification.
+                You can input images of type "jpg" "jpeg" "png" and it will out put 5 possible answers with confidence percentage. Try it out !
+            </span>
+        </div>
+        <form method="POST" enctype="multipart/form-data" class="form-horizontal p-5 w-100 form-bordered" asp-controller="ML" asp-action="Predict">
+            <div class="form-group form-actions ">
+                <div class="form-group w-50" style="margin-top:10px">
                     <label asp-for="BatchName"></label>
                     <input class="form-control" type="string" asp-for="BatchName">
                     <span asp-validation-for="BatchName" class="text-danger"></span>
                 </div>
-                <div class="col-md-9 col-md-offset-4">
-                    <button type="submit" id="submit" class="btn btn-sm btn-primary"><i class="bi bi-floppy"></i> Upload</button>
+                <div id="dropzoneMLPredictionForm" class="form-group dropzone dz-clickable mt-3 bg-darkblue" style="height:350px">
+
+                </div>
+                <div class="mt-3">
+                    <button type="submit" id="submit" class="btn btn-sm btn-primary"><i class="bi bi-floppy"></i> Upload & Predict</button>
                 </div>
             </div>
         </form>

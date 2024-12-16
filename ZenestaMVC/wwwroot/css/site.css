@@ -64,3 +64,24 @@ body {
 .bg-darker {
     background-color: #111111;
 }
+
+.bg-darkblue-selected {
+    background-color: rgba(48, 52, 65);
+}
+
+.hover-show:hover {
+    overflow: visible;
+    white-space: normal;
+    font-size: 11px;
+    height: auto; /* just added this line */
+}
+
+.dropzone {
+    border: dashed !important;
+    border-color: darkcyan !important;
+    border-radius: 10px !important;
+}
+
+.dropzone:hover {
+    background-color: rgba(48, 52, 65) !important;
+}

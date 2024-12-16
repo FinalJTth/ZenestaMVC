@@ -1,7 +1,8 @@
-﻿
-<div class="card w-100">
-    @{
-        List<List<ZenestaMVC.Models.Entity.PredictionResult>> predictionResults = new()
+﻿@model ZenestaMVC.Models.Entity.PredictionBatch
+
+@{
+    /*
+    List<List<ZenestaMVC.Models.Entity.PredictionResult>> predictionResults = new()
         {
             new List<ZenestaMVC.Models.Entity.PredictionResult>
             {
@@ -23,28 +24,74 @@
 
 
 
-        List<ZenestaMVC.Models.Entity.PredictionImage> predictionImages = new()
+    List<ZenestaMVC.Models.Entity.PredictionImage> predictionImages = new()
         {
             new ZenestaMVC.Models.Entity.PredictionImage { Id = 1, Name = "test1.jpg", PredictionId = 1, Data = File.ReadAllBytes("./wwwroot/img/test/cat-pictures-zc3gu0636kmldm04.jpg") },
-            new ZenestaMVC.Models.Entity.PredictionImage { Id = 2, Name = "test2.png", PredictionId = 2, Data = File.ReadAllBytes("path/to/your/Odie.png") }
+            new ZenestaMVC.Models.Entity.PredictionImage { Id = 2, Name = "test2.png", PredictionId = 2, Data = File.ReadAllBytes("./wwwroot/img/test/Odie.png") }
         };
 
-        List<ZenestaMVC.Models.Entity.Prediction> predictions = new()
+    List<ZenestaMVC.Models.Entity.Prediction> predictions = new()
         {
-            new ZenestaMVC.Models.Entity.Prediction { Id = 1, PredictionBatchId = 1, PredictionResults = predictionResults[0] },
-            new ZenestaMVC.Models.Entity.Prediction { Id = 2, PredictionBatchId = 1, PredictionResults = predictionResults[1] }
-        };
-    }
-    <div class="row g-0">
-        <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
-        </div>
-        <div class="col-md-8">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            new ZenestaMVC.Models.Entity.Prediction { Id = 1, PredictionBatchId = 1, PredictionResults = predictionResults[0], PredictionImage = predictionImages[0] },
+            new ZenestaMVC.Models.Entity.Prediction { Id = 2, PredictionBatchId = 1, PredictionResults = predictionResults[1], PredictionImage = predictionImages[1] }
+        }
+    */
+}
+
+<h1 class="mb-4">Prediction Results</h1>
+
+@if (Model.Id != 0)
+{
+    List<ZenestaMVC.Models.Entity.Prediction> predictions = Model.Predictions.ToList();
+        
+    @for (int i = 0; i < predictions.Count; i++)
+    {
+        ZenestaMVC.Models.Entity.Prediction prediction = predictions[i];
+        string extension = @prediction.PredictionImage.Name.Split('.')[1];
+        string imgSrc = $"data:image/{extension};base64,{Convert.ToBase64String(prediction.PredictionImage.Data)}";
+
+
+        <div class="card bg-darkblue mb-3" style="min-height:180px; max-height:180px; min-width:85%; max-width:85%">
+            <div class="d-flex" style="width:inherit">
+                <div class="overflow-hidden" style="min-width:180px; min-height:180px">
+                    <img src="@imgSrc" class="img-fluid rounded-start object-fit-cover" alt="Dynamic Image" style="width:180px; height:180px">
+                </div>
+                <div class="w-100 overflow-hidden">
+                    <div class="card-header d-flex align-items-center" style="height:30px;">
+                        <span class="d-inline-block text-truncate hover-show" style="white-space:nowrap">@prediction.PredictionImage.Name</span>
+                    </div>
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-7 border-end">
+                                Classified as
+                            </div>
+                            <div class="col-auto">
+                                Confidence
+                            </div>
+                        </div>
+                        @{
+                            List<ZenestaMVC.Models.Entity.PredictionResult> predictionResults = prediction.PredictionResults.ToList();
+                        }
+                        @foreach (ZenestaMVC.Models.Entity.PredictionResult predictionResult in predictionResults)
+                        {
+                            <div class="row border-top">
+                                <div class="col-7 border-end">
+                                    <span class="text-secondary-emphasis">@predictionResult.Object</span>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="text-secondary-emphasis">@predictionResult.Confidence</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
             </div>
         </div>
+    }
+}
+else
+{
+    <div class="card d-flex justify-content-center align-items-center mb-3" style="min-height:180px; max-height:180px; width:90%">
+        <h4>Select a prediction batch to view the result.</h4>
     </div>
-</div>
+}
