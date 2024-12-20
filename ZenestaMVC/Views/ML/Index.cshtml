@@ -7,8 +7,8 @@
     ViewData["Title"] = "ML";
 }
 
-<div class="container h-100">
-    <div class="container d-flex flex-column align-items-center p-0 mb-5" style="height:100%;width:900px;margin-block-start:10vh">
+<div class="h-100 container">
+    <div class="d-flex flex-column align-items-center p-0 mb-5 container" style="height:100%;width:900px;margin-block-start:10vh">
         <div class="container">
             <h1>Machine Learning</h1>
             <h5 style="font-weight:normal">
@@ -27,7 +27,7 @@
             </span>
         </div>
         <form method="POST" enctype="multipart/form-data" class="form-horizontal p-5 w-100 form-bordered" asp-controller="ML" asp-action="Predict">
-            <div class="form-group form-actions ">
+            <div class="form-group form-actions">
                 <div class="form-group w-50" style="margin-top:10px">
                     <label asp-for="BatchName"></label>
                     <input class="form-control" type="string" asp-for="BatchName">
@@ -53,7 +53,7 @@
             return "Images";
         }
         Dropzone.options.dropzoneMLPredictionForm = {
-            url: "https://localhost:7000/ML/Predict",
+            url: "@Url.Action("Predict", "ML")",
             acceptedFiles: "image/jpeg, image/png, image/jpg",
             autoProcessQueue: false,
             autoDiscover: true,
@@ -67,6 +67,12 @@
                     if (response.redirectUrl) {
                         window.location.href = response.redirectUrl;
                     }
+                });
+
+                this.on('sendingmultiple', function (data, xhr, formData) {
+                    formData.append("BatchName", $('[name="BatchName"]').val());
+                    xhr.setRequestHeader("XSRF-TOKEN", $('input:hidden[name="__RequestVerificationToken"]').val());
+                    formData.append("__RequestVerificationToken", $('input:hidden[name="__RequestVerificationToken"]').val());
                 });
 
                 $("#submit").click(function (e) {

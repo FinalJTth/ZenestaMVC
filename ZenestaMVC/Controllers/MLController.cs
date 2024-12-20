@@ -42,8 +42,7 @@ namespace ZenestaMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [RequestSizeLimit(1000_000_000)]
-        public async Task<IActionResult> Predict(PredictionForm predictionForm)
+        public async Task<IActionResult> Predict([FromForm] PredictionForm predictionForm)
         {
             if (UserId == null)
             {

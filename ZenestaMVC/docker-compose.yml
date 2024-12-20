@@ -1,0 +1,14 @@
+﻿services:
+  mssql-db:
+    container_name: mssql-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "ZenestaDev1234"
+    networks:
+      - db
+
+networks:
+  db:

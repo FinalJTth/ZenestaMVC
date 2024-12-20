@@ -10,7 +10,7 @@ namespace ZenestaMVC.Services
         {
             _httpClient = httpClient;
 
-            _httpClient.BaseAddress = new Uri("http://localhost:5555/");
+            _httpClient.BaseAddress = new Uri("http://localhost:6060/");
         }
         public async Task<List<Dictionary<string, string>>> GetPrediction(IFormFile image)
         {
@@ -18,7 +18,7 @@ namespace ZenestaMVC.Services
 
             multiPartContent.Add(new StreamContent(image.OpenReadStream()), "image", image.FileName);
 
-            HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:5555/predict", multiPartContent);
+            HttpResponseMessage response = await _httpClient.PostAsync(_httpClient.BaseAddress + "/predict", multiPartContent);
             string jsonStringResult = response.Content.ReadAsStringAsync().Result;
 
             Dictionary<string, List<Dictionary<string, string>>>? responseDict = JsonSerializer.Deserialize<Dictionary<string, List<Dictionary<string, string>>>>(jsonStringResult);
