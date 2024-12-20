@@ -9,7 +9,7 @@ ASP.NET Core is an open-source and cross-platform framework for building modern 
 
 ## Getting start
 
-1. Run ```docker compose up -d``` to deploy a database.
+1. Run ```docker compose up -d``` to deploy a database. You need to have docker installed on your machine.
 2. Open solution with ```Visual Studio 2022``` Make sure that you have ```ASP.NET and web development``` installed.
 3. Open NuGet Package Manager Console by going to ```Tools > NuGet Package Manager > Package Manager Console```
 4. Run on that console ```add-migration Initial``` and ```update-database``` after.
